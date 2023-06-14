@@ -12,6 +12,7 @@ const Navbar = () => {
             <Link to="/update">Update Product </Link>
             <Link to="/logout">Logout</Link>
             <Link to="/profile">Profile</Link>
+            <Link to="/signup">Sign Up</Link>
           </li>
         </ul>
       </div>
