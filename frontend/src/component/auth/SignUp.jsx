@@ -15,7 +15,7 @@ const SignUp = () => {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       console.log(values);
-      // Handle form submission logic here
+      // Handle form submission logic here 
     },
   });
   return (
