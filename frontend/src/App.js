@@ -1,9 +1,8 @@
-import logo from "./logo.svg";
 import "./App.css";
 import Navbar from "./component/navbar/Navbar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Footer from "./component/footer/Footer";
-import SignUp from "./component/auth/SignUp";
+import SignUp from "./auth/SignUp";
 function App() {
   return (
     <>
