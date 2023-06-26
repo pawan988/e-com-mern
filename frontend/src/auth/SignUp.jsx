@@ -26,7 +26,6 @@ const SignUp = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values, { resetForm }) => {
-      console.log(values);
       const userSignupPayload = {
         name: values?.name,
         email: values?.email,
@@ -34,6 +33,7 @@ const SignUp = () => {
         confirm_password: values?.confirm_password,
         phone: values?.phone,
       };
+      console.log("userSignupPayload ===>>>", userSignupPayload);
       dispatch(signupUser(userSignupPayload));
       // Handle form submission logic heres
       resetForm();

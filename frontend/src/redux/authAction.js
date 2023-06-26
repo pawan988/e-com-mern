@@ -5,7 +5,8 @@ const BASE_URL = `http://localhost:8000`;
 // const BASE_URL = "http://127.0.0.1:5000";
 export const signupUser = createAsyncThunk(
   "users/signupUser",
-  async ({ signupData }, thunkAPI) => {
+  async (signupData, thunkAPI) => {
+    console.log(signupData);
     try {
       const config = {
         headers: {
@@ -17,8 +18,8 @@ export const signupUser = createAsyncThunk(
         signupData,
         config
       );
-      if (data.carts) {
-        console.log("register success....");
+      if (data) {
+        console.log("register success....data ===>>>", data);
         return data;
       }
     } catch (e) {
