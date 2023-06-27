@@ -17,6 +17,8 @@ export const signupUser = createAsyncThunk(
         config
       );
       if (data) {
+        localStorage?.setItem("user", data?.email);
+        window.location.href = "/";
         return data;
       }
     } catch (e) {

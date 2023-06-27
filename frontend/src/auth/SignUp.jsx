@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useSelector, useDispatch } from "react-redux";
 import { signupUser } from "../redux/authAction";
+import { useNavigate } from "react-router-dom";
 const SignUp = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { userInfo } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    const user = localStorage?.getItem("user");
+    if (user) {
+      navigate("/");
+    }
+  }, []);
+
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
     email: Yup.string().email("Invalid email").required("Email is required"),
