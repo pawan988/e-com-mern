@@ -5,10 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { signupUser } from "../redux/authAction";
 const SignUp = () => {
   const dispatch = useDispatch();
-  const { loading, userInfo, error, success } = useSelector(
-    (state) => state.user
-  );
-
+  const { userInfo } = useSelector((state) => state.user);
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
     email: Yup.string().email("Invalid email").required("Email is required"),
@@ -33,9 +30,7 @@ const SignUp = () => {
         confirm_password: values?.confirm_password,
         phone: values?.phone,
       };
-      console.log("userSignupPayload ===>>>", userSignupPayload);
       dispatch(signupUser(userSignupPayload));
-      // Handle form submission logic heres
       resetForm();
     },
   });
