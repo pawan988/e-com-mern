@@ -1,29 +1,37 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { userSignupApi, userLoginApi } from "../apis/authApis";
 
-const BASE_URL = `http://localhost:8000`;
-export const signupUser = createAsyncThunk(
+export const signupUserActionHandler = createAsyncThunk(
   "users/signupUser",
-  async (signupData, thunkAPI) => {
+  async (signupData, setIsReister, thunkAPI) => {
     try {
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-      const { data } = await axios.post(
-        `${BASE_URL}/register`,
-        signupData,
-        config
-      );
-      if (data) {
-        localStorage?.setItem("user", data?.email);
-        window.location.href = "/";
-        return data;
+      const res = await userSignupApi(signupData);
+      if (res) {
+        if (res?.status === 200) {
+          setIsReister(false);
+        }
       }
-    } catch (e) {
-      console.error("Error", e);
-      return thunkAPI.rejectWithValue(e.message);
+    } catch (err) {
+      console.log(err);
+      return thunkAPI.rejectWithValue(err.message);
+    }
+  }
+);
+
+export const loginUserActionHandler = createAsyncThunk(
+  "users/signupUser",
+  async (loginData, thunkAPI) => {
+    try {
+      const res = await userLoginApi(loginData);
+      if (res) {
+        if (res?.status === 200) {
+          localStorage?.setItem("user", res?.data?.email);
+          window.location.href = "/";
+        }
+      }
+    } catch (err) {
+      console.log(err);
+      return thunkAPI.rejectWithValue(err.message);
     }
   }
 );

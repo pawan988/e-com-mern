@@ -2,7 +2,7 @@ import "./App.css";
 import Navbar from "./component/navbar/Navbar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Footer from "./component/footer/Footer";
-import SignUp from "./auth/SignUp";
+import SignUp from "./auth/Auth";
 import PrivateComponent from "./component/PrivateComponent";
 function App() {
   return (

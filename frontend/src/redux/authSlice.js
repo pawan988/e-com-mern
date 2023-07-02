@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { signupUser } from "./authAction";
+import { signupUserActionHandler, loginUserActionHandler } from "./authAction";
 const initialState = {
   loading: false,
   userInfo: {}, // for user object
@@ -15,15 +15,29 @@ export const userSlice = createSlice({
     // Reducer comes here
   },
   extraReducers: {
-    [signupUser.fulfilled]: (state, { payload }) => {
+    [signupUserActionHandler.fulfilled]: (state, { payload }) => {
       state.loading = false;
       state.success = true;
       state.userInfo = payload;
     },
-    [signupUser.pending]: (state) => {
+    [signupUserActionHandler.pending]: (state) => {
       state.loading = true;
     },
-    [signupUser.rejected]: (state, { payload }) => {
+    [signupUserActionHandler.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.error = true;
+      state.errorMessage = payload.message;
+    },
+    [loginUserActionHandler.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      state.success = true;
+      state.userInfo = payload;
+      // state.userToken = payload.token;
+    },
+    [loginUserActionHandler.pending]: (state) => {
+      state.loading = true;
+    },
+    [loginUserActionHandler.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = true;
       state.errorMessage = payload.message;
