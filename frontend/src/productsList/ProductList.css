@@ -1,0 +1,26 @@
+.product-list-main-container {
+  width: 99.9vw;
+  height: auto;
+}
+
+.product-list-wraper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6vw;
+  height: auto;
+  padding: 2vw 4vw;
+}
+
+.product-container {
+  width: 18vw;
+  height: 20vw;
+  box-shadow: 2px 4px 6px 2px lightgray;
+  border: 1px solid blue;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.5s ease;
+}
+
+.product-container:hover {
+  transform: translateY(5px);
+}
