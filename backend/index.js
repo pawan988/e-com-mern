@@ -2,6 +2,7 @@ const express = require("express");
 require("./db/config");
 const cors = require("cors");
 const User = require("./db/users");
+const Products = require("./db/products");
 const app = express();
 
 app.use(express.json());
@@ -24,6 +25,14 @@ app.post("/login", async (req, res) => {
     }
   } else {
     res.send({ message: "Bad Request" });
+  }
+});
+
+app.post("/addProduct", async (req, res) => {
+  if (req.body) {
+    let products = new Products(req.body);
+    let result = await products.save();
+    res.status(200).send("Product add successfully");
   }
 });
 
