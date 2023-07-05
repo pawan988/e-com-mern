@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   signupUserActionHandler,
   loginUserActionHandler,
-} from "../redux/authAction";
+} from "../redux/actions/auth/action";
 import { useNavigate } from "react-router-dom";
 import "./Auth.css";
 const SignUp = () => {

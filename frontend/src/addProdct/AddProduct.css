@@ -1,0 +1,21 @@
+.add-product-main-container {
+  width: 99.9vw;
+  height: auto;
+}
+.add-product-heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1vw 0vw;
+}
+
+.add-product-form-container {
+  border: 1px solid #000000;
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0.521vw;
+  width: 20vw;
+  height: auto;
+}

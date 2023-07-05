@@ -1,5 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { signupUserActionHandler, loginUserActionHandler } from "./authAction";
+import {
+  signupUserActionHandler,
+  loginUserActionHandler,
+} from "../../actions/auth/action";
 const initialState = {
   loading: false,
   userInfo: {}, // for user object
