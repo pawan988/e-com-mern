@@ -31,11 +31,11 @@ export const userSlice = createSlice({
       state.error = true;
       state.errorMessage = payload.message;
     },
-    [loginUserActionHandler.fulfilled]: (state, { payload }) => {
+    [loginUserActionHandler.fulfilled]: (state, action) => {
       state.loading = false;
       state.success = true;
-      state.userInfo = payload;
-      // state.userToken = payload.token;
+      state.userInfo = action.payload;
+      // state.userToken = action.payload.token;
     },
     [loginUserActionHandler.pending]: (state) => {
       state.loading = true;

@@ -9,6 +9,7 @@ export const signupUserActionHandler = createAsyncThunk(
       if (res) {
         if (res?.status === 200) {
           setIsReister(false);
+          return res;
         }
       }
     } catch (err) {
@@ -19,14 +20,15 @@ export const signupUserActionHandler = createAsyncThunk(
 );
 
 export const loginUserActionHandler = createAsyncThunk(
-  "users/signupUser",
+  "users/loginUser",
   async (loginData, thunkAPI) => {
     try {
       const res = await userLoginApi(loginData);
       if (res) {
         if (res?.status === 200) {
           localStorage?.setItem("user", res?.data?.email);
-          window.location.href = "/";
+          // window.location.href = "/";
+          return res;
         }
       }
     } catch (err) {

@@ -13,7 +13,6 @@ const SignUp = () => {
   const navigate = useNavigate();
   const [isRegiser, setIsReister] = useState(true);
   const { userInfo } = useSelector((state) => state.user);
-
   useEffect(() => {
     const user = localStorage?.getItem("user");
     if (user) {
@@ -62,7 +61,6 @@ const SignUp = () => {
     },
     validationSchema: loginValidationSchema,
     onSubmit: (values, { resetForm }) => {
-      console.log("values ===>>>", values);
       const userLoginPayload = {
         email: values?.email,
         password: values?.password,

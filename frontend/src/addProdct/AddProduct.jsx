@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./AddProduct.css";
+import { addProductActionHandler } from "../redux/actions/product/productAction";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useSelector, useDispatch } from "react-redux";
 const AddProduct = () => {
+  const dispatch = useDispatch();
+
+  const productDetail = useSelector((state) => state);
+
   const validationSchema = Yup.object().shape({
     productName: Yup.string().required("Product name is required"),
     productPrice: Yup.string().required("Product Price is required"),
@@ -17,12 +22,12 @@ const AddProduct = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values, { resetForm }) => {
-      const userSignupPayload = {
-        productName: values?.productName,
-        productPrice: values?.productPrice,
-        productCategory: values?.productCategory,
+      const addProductPayload = {
+        name: values?.productName,
+        price: values?.productPrice,
+        detail: values?.productCategory,
       };
-      //   dispatch(signupUserActionHandler(userSignupPayload, setIsReister));
+      dispatch(addProductActionHandler(addProductPayload));
       resetForm();
     },
   });
