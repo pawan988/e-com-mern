@@ -3,7 +3,6 @@ require("./db/config");
 const cors = require("cors");
 const User = require("./db/users");
 const Products = require("./db/products");
-const products = require("./db/products");
 const app = express();
 
 app.use(express.json());
@@ -37,13 +36,25 @@ app.post("/addProduct", async (req, res) => {
   }
 });
 
-app.listen(8000);
-
 app.get("/getProducts", async (req, res) => {
-  const results = await products.find();
+  const results = await Products.find();
   if (results?.length > 0) {
     res.status(200).send(results);
   } else {
     res.send({ messagae: "No product found" });
   }
 });
+
+app.delete("/deleteProduct/:id", async (req, res) => {
+  if (req.params.id) {
+    let result = await Products.deleteOne({ _id: req.params.id });
+    res.send({ status: 200, message: "Product delete succesfully" });
+  } else {
+    res.send({
+      status: 400,
+      message: "Bad request",
+    });
+  }
+});
+
+app.listen(8000);
