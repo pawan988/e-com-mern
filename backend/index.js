@@ -39,7 +39,7 @@ app.post("/addProduct", async (req, res) => {
 
 app.listen(8000);
 
-app.post("/getProducts", async (req, res) => {
+app.get("/getProducts", async (req, res) => {
   const results = await products.find();
   if (results?.length > 0) {
     res.status(200).send(results);
