@@ -16,3 +16,14 @@ export const addProductApi = async (productData) => {
 
   return response;
 };
+
+export const getProductsApi = async () => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  const response = await axios.get(`${BASE_URL}/getProducts`, config);
+  return response;
+};

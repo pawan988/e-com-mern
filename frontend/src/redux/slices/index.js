@@ -4,5 +4,5 @@ import { addProductSlice } from "./product/productSlice";
 
 export const rootReducer = combineReducers({
   user: userSlice.reducer,
-  addProductRes: addProductSlice.reducer,
+  productRes: addProductSlice.reducer,
 });

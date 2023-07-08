@@ -1,5 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addProductActionHandler } from "../../actions/product/productAction";
+import {
+  addProductActionHandler,
+  getProductActionHandler,
+} from "../../actions/product/productAction";
 
 const initialState = {
   loading: false,
@@ -16,7 +19,6 @@ export const addProductSlice = createSlice({
   },
   extraReducers: {
     [addProductActionHandler.fulfilled]: (state, { payload }) => {
-      console.log("products pyload ====>>>>", payload);
       state.loading = false;
       state.success = true;
       state.products = payload;
@@ -25,6 +27,20 @@ export const addProductSlice = createSlice({
       state.loading = true;
     },
     [addProductActionHandler.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.error = true;
+      state.errorMessage = payload.message;
+    },
+
+    [getProductActionHandler.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      state.success = true;
+      state.products = payload;
+    },
+    [getProductActionHandler.pending]: (state) => {
+      state.loading = true;
+    },
+    [getProductActionHandler.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = true;
       state.errorMessage = payload.message;
