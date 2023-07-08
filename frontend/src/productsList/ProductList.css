@@ -24,3 +24,22 @@
 .product-container:hover {
   transform: translateY(5px);
 }
+
+.delete-product-button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-product-button > button {
+  background-color: brown;
+  color: #ffffff;
+  height: 2vw;
+  width: 10vw;
+  cursor: pointer;
+  font-size: 400;
+  font-size: 1vw;
+  border: 1px solid brown;
+  border-radius: 5px;
+}
