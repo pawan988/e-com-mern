@@ -6,14 +6,16 @@ import "./ProductList.css";
 const ProductList = () => {
   const dispacth = useDispatch();
   const [productData, setProductData] = useState([]);
-  const getProductsData = useSelector((state) => state && state);
+  const getProductsData = useSelector(
+    (state) => state && state?.productRes && state?.productRes?.products
+  );
   useEffect(() => {
     dispacth(getProductActionHandler());
   }, []);
 
   useEffect(() => {
     if (getProductsData) {
-      setProductData(getProductsData?.productRes?.products?.data);
+      setProductData(getProductsData);
     }
   }, [getProductsData]);
 

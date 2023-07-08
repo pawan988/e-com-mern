@@ -24,7 +24,7 @@ export const getProductActionHandler = createAsyncThunk(
       const res = await getProductsApi(productData);
       if (res) {
         if (res?.status === 200) {
-          return res;
+          return res?.data;
         }
       }
     } catch (err) {
