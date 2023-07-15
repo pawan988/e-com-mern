@@ -93,4 +93,27 @@ app.put("/updateProduct/:id", async (req, res) => {
   }
 });
 
+app.get("/search/:key", async (req, res) => {
+  try {
+    if (!req.params.key) {
+      return res.status(400).json({ message: "Not any matches" });
+    }
+    let result = await Products.find({
+      $or: [{ name: { $regex: req.params.key } }],
+    });
+    if (result.length > 0) {
+      res.status(200).json({
+        data: result,
+        message: "data fatched succesfully.",
+      });
+    } else {
+      return res.status(404).json({ message: "No data matches." });
+    }
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ messagae: "Internal server error", success: false });
+  }
+});
+
 app.listen(8000);
