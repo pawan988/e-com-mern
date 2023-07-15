@@ -3,6 +3,7 @@ require("./db/config");
 const cors = require("cors");
 const User = require("./db/users");
 const Products = require("./db/products");
+const products = require("./db/products");
 const app = express();
 
 app.use(express.json());
@@ -54,6 +55,41 @@ app.delete("/deleteProduct/:id", async (req, res) => {
       status: 400,
       message: "Bad request",
     });
+  }
+});
+
+app.put("/updateProduct/:id", async (req, res) => {
+  const productId = req.params.id;
+
+  try {
+    if (!productId) {
+      return res
+        .status(400)
+        .json({ message: "Invalid product ID", success: false });
+    }
+
+    const result = await Products.updateOne(
+      { _id: productId },
+      { $set: req.body }
+    );
+
+    if (result.nModified === 0) {
+      return res
+        .status(404)
+        .json({ message: "Product not found", success: false });
+    }
+
+    const updatedProduct = await Products.findOne({ _id: productId });
+    return res.status(200).json({
+      message: "Product updated successfully",
+      success: true,
+      product: updatedProduct,
+    });
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(500)
+      .json({ message: "Internal server error", success: false });
   }
 });
 
