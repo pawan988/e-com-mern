@@ -43,3 +43,27 @@
   border: 1px solid brown;
   border-radius: 5px;
 }
+
+.product-search-cont {
+  width: 100vw;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: flex-end;
+  padding: 1vw 1vw 1vw 0vw;
+}
+.product-search-btn-input-cont {
+  display: flex;
+  flex-direction: row;
+  gap: 2vw;
+}
+
+.search-btn-cont {
+  width: 5vw;
+  height: 2vw;
+  background-color: brown;
+  color: #ffffff;
+  font-size: 0.9vw;
+  border: 1px solid brown;
+  border-radius: 7px;
+  cursor: pointer;
+}

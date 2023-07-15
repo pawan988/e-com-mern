@@ -11,6 +11,7 @@ const ProductList = () => {
   const navigate = useNavigate();
   const dispacth = useDispatch();
   const [productData, setProductData] = useState([{}]);
+  const [serachQuery, setSearchQuery] = useState("");
   const getProductsData = useSelector(
     (state) => state && state?.getProductRes && state?.getProductRes?.products
   );
@@ -29,9 +30,30 @@ const ProductList = () => {
   const handleProductUpdate = (data) => {
     navigate("/update", { state: { data: data } });
   };
+  const searchOnChangeHandler = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const searchSubmit = () => {
+    if (!serachQuery) {
+      console.log("API calling");
+    }
+  };
   return (
     <>
       <div className="product-list-main-container">
+        <div className="product-search-cont">
+          <div className="product-search-btn-input-cont">
+            <input
+              type="text"
+              placeholder="Sarch item"
+              onChange={(e) => searchOnChangeHandler(e)}
+            />
+            <button className="search-btn-cont" onClick={() => searchSubmit()}>
+              Search
+            </button>
+          </div>
+        </div>
         <div className="product-list-wraper">
           {productData &&
             productData?.length > 0 &&
