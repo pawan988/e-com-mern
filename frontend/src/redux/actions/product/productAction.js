@@ -3,6 +3,7 @@ import {
   addProductApi,
   getProductsApi,
   deleteProductApi,
+  updateProductApi,
 } from "../../../apis/productsApis";
 export const addProductActionHandler = createAsyncThunk(
   "addProduct",
@@ -46,6 +47,23 @@ export const deleteProductActionHandler = createAsyncThunk(
       if (res) {
         if (res?.status === 200) {
           thunkAPI.dispatch(getProductActionHandler());
+          return res?.data;
+        }
+      }
+    } catch (err) {
+      console.log(err);
+      return thunkAPI.rejectWithValue(err.message);
+    }
+  }
+);
+
+export const updateProductActionHandler = createAsyncThunk(
+  "updateProduct",
+  async (productData, thunkAPI) => {
+    try {
+      const res = await updateProductApi(productData);
+      if (res) {
+        if (res?.status === 200) {
           return res?.data;
         }
       }

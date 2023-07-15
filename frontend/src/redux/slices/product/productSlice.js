@@ -3,6 +3,7 @@ import {
   addProductActionHandler,
   getProductActionHandler,
   deleteProductActionHandler,
+  updateProductActionHandler,
 } from "../../actions/product/productAction";
 
 const addInitialState = {
@@ -25,6 +26,14 @@ const deleteInitialState = {
   success: false,
   products: {},
   error: null,
+  errorMessage: "",
+};
+
+const updateInitialState = {
+  loading: false,
+  success: false,
+  error: null,
+  products: {},
   errorMessage: "",
 };
 
@@ -90,6 +99,29 @@ export const deleteProductSlice = createSlice({
       state.loading = true;
     },
     [deleteProductActionHandler.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.error = true;
+      state.errorMessage = payload.message;
+    },
+  },
+});
+
+export const updateProductSlice = createSlice({
+  name: "updateProduct",
+  initialState: updateInitialState,
+  reducers: {
+    // Reducers for add action
+  },
+  extraReducers: {
+    [updateProductActionHandler.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      state.success = true;
+      state.products = payload;
+    },
+    [updateProductActionHandler.pending]: (state) => {
+      state.loading = true;
+    },
+    [updateProductActionHandler.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = true;
       state.errorMessage = payload.message;

@@ -37,3 +37,19 @@ export const deleteProductApi = async (productId) => {
   const response = await axios.delete(`${BASE_URL}/deleteProduct/${productId}`);
   return response;
 };
+
+export const updateProductApi = async (productData) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  const response = await axios.put(
+    `${BASE_URL}/updateProduct/${productData?.id}`,
+    productData,
+    config
+  );
+
+  return response;
+};

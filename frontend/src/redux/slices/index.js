@@ -4,6 +4,7 @@ import {
   addProductSlice,
   getProductSlice,
   deleteProductSlice,
+  updateProductSlice,
 } from "./product/productSlice";
 
 export const rootReducer = combineReducers({
@@ -11,4 +12,5 @@ export const rootReducer = combineReducers({
   addProductRes: addProductSlice.reducer,
   getProductRes: getProductSlice.reducer,
   deleteProductRes: deleteProductSlice.reducer,
+  updateaProductRes: updateProductSlice?.reducer,
 });

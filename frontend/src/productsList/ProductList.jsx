@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   getProductActionHandler,
   deleteProductActionHandler,
@@ -7,12 +8,12 @@ import {
 import "./ProductList.css";
 
 const ProductList = () => {
+  const navigate = useNavigate();
   const dispacth = useDispatch();
   const [productData, setProductData] = useState([{}]);
   const getProductsData = useSelector(
     (state) => state && state?.getProductRes && state?.getProductRes?.products
   );
-  console.log("getProductsData ===>>>", getProductsData);
   useEffect(() => {
     dispacth(getProductActionHandler());
   }, []);
@@ -24,6 +25,9 @@ const ProductList = () => {
   }, [getProductsData]);
   const handleProductDelete = (id) => {
     dispacth(deleteProductActionHandler(id));
+  };
+  const handleProductUpdate = (data) => {
+    navigate("/update", { state: { data: data } });
   };
   return (
     <>
@@ -40,6 +44,9 @@ const ProductList = () => {
                   <div className="delete-product-button">
                     <button onClick={() => handleProductDelete(items?._id)}>
                       Delete
+                    </button>
+                    <button onClick={() => handleProductUpdate(items)}>
+                      Update
                     </button>
                   </div>
                 </div>
