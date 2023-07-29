@@ -26,7 +26,9 @@ export const loginUserActionHandler = createAsyncThunk(
       const res = await userLoginApi(loginData);
       if (res) {
         if (res?.status === 200) {
-          localStorage?.setItem("user", res?.data?.email);
+          console.log("res.data ====>>>>", res.data);
+          localStorage?.setItem("user", res?.data?.user?.email);
+          localStorage?.setItem("auth_token", res?.data?.auth);
           // window.location.href = "/";
           return res;
         }

@@ -1,6 +1,7 @@
 import axios from "axios";
-const BASE_URL = `http://localhost:8000`;
+import { get_token } from "../utils/utils";
 
+const BASE_URL = `http://localhost:8000`;
 export const addProductApi = async (productData) => {
   const config = {
     headers: {
@@ -10,8 +11,8 @@ export const addProductApi = async (productData) => {
 
   const response = await axios.post(
     `${BASE_URL}/addProduct`,
-    productData,
-    config
+    config,
+    productData
   );
 
   return response;
@@ -21,6 +22,7 @@ export const getProductsApi = async () => {
   const config = {
     headers: {
       "Content-Type": "application/json",
+      Authorization: get_token(),
     },
   };
 
