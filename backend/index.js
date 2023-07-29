@@ -9,6 +9,24 @@ const app = express();
 const jwtKey = "e-com";
 app.use(express.json());
 app.use(cors());
+
+const verifyToken = (req, res, next) => {
+  const token = req.header("Authorization")?.split(" ")[0];
+  if (!token) {
+    return res
+      .status(401)
+      .json({ success: false, message: "Access denied. Token missing." });
+  } else {
+    jwt.verify(token, jwtKey, (err, valid) => {
+      if (valid) {
+        next();
+      } else {
+        res.send(err);
+      }
+    });
+  }
+};
+
 app.post("/register", async (req, res) => {
   let user = new User(req.body);
   let result = await user.save();
@@ -38,7 +56,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.post("/addProduct", async (req, res) => {
+app.post("/addProduct", verifyToken, async (req, res) => {
   if (req.body) {
     let products = new Products(req.body);
     let result = await products.save();
@@ -46,7 +64,7 @@ app.post("/addProduct", async (req, res) => {
   }
 });
 
-app.get("/getProducts", async (req, res) => {
+app.get("/getProducts", verifyToken, async (req, res) => {
   const results = await Products.find();
   if (results?.length > 0) {
     res.status(200).send(results);
@@ -55,7 +73,7 @@ app.get("/getProducts", async (req, res) => {
   }
 });
 
-app.delete("/deleteProduct/:id", async (req, res) => {
+app.delete("/deleteProduct/:id", verifyToken, async (req, res) => {
   if (req.params.id) {
     let result = await Products.deleteOne({ _id: req.params.id });
     res.send({ status: 200, message: "Product delete succesfully" });
@@ -67,7 +85,7 @@ app.delete("/deleteProduct/:id", async (req, res) => {
   }
 });
 
-app.put("/updateProduct/:id", async (req, res) => {
+app.put("/updateProduct/:id", verifyToken, async (req, res) => {
   const productId = req.params.id;
 
   try {
