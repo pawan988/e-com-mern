@@ -1,11 +1,12 @@
 const express = require("express");
 require("./db/config");
 const cors = require("cors");
+const jwt = require("jsonwebtoken");
 const User = require("./db/users");
 const Products = require("./db/products");
 const products = require("./db/products");
 const app = express();
-
+const jwtKey = "e-com";
 app.use(express.json());
 app.use(cors());
 app.post("/register", async (req, res) => {
@@ -20,7 +21,15 @@ app.post("/login", async (req, res) => {
   if (req.body.email && req.body.password) {
     let user = await User.findOne(req.body).select("-password");
     if (user) {
-      res.send(user);
+      jwt.sign({ user }, jwtKey, { expiresIn: "2h" }, (err, token) => {
+        if (err) {
+          res.send({
+            result: "Something went wrong Please try after some time",
+          });
+        } else {
+          res.status(200).send({ user, auth: token });
+        }
+      });
     } else {
       res.send({ message: "User dose not exist" });
     }
